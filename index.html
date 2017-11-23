@@ -2,165 +2,53 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>ChimaCode - IFRS</title>
+    <meta charset="UTF-8">
+    <title>ChimaCode - IFRS</title>
 
 
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css'>
 
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 
 </head>
 
 <body>
-  <html lang="en">
+    <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ChimaCode - IFRS</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ChimaCode - IFRS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
 
-  <body>
+    <body>
 
-    <div class="container">
-      <header class="page-header">
-        <div class="branding">
-          <a href="#">
-            <img src="images/LogoGrande.png" alt="Logo" title="Home page" class="logo" />
-          </a>
-          <h1>ChimaCode - IFRS</h1>
+        <div class="container">
+            <header class="page-header">
+                <div class="branding">
+                    <a href="#">
+                        <img src="images/LogoGrande.png" alt="Logo" title="Home page" class="logo" />
+                    </a>
+                    <h1>ChimaCode - IFRS</h1>
+                </div>
+            </header>
+            <main id="app">
+                <router-view></router-view>
+            </main>
         </div>
-      </header>
-      <main id="app">
-        <router-view></router-view>
-      </main>
-    </div>
 
-    <template id="user-list">
-      <div>
-        <div class="actions">
-          <router-link class="btn btn-default" v-bind:to="{path: '/add-user'}">
-            <span class="glyphicon glyphicon-plus"></span>
-            Adicionar usuario
-          </router-link>
-        </div>
-        <div class="filters row">
-          <div class="form-group col-sm-3">
-            <label for="search-element">Pesquisar usuario</label>
-            <input v-model="searchKey" class="form-control" id="search-element" requred/>
-          </div>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th class="col-sm-2">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in filteredUsers">
-              <td>{{ user.id }}</td>
-              <td>
-                <router-link v-bind:to="{name: 'user', params: {user: user.id}}">{{ user.name }}</router-link>
-              </td>
-              <td>{{ user.username }}</td>
-              <td>
-                {{ user.email }}
-              </td>
-              <td>
-                <router-link class="btn btn-warning btn-xs" v-bind:to="{name: 'user-edit', params: {user_id: user.id}}">Editar</router-link>
-                <router-link class="btn btn-danger btn-xs" v-bind:to="{name: 'user-delete', params: {user_id: user.id}}">Deletar</router-link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </template>
 
-    <template id="add-user">
-      <div>
-        <h2>Adicionar novo usuario</h2>
-        <form v-on:submit="createUser">
-          <div class="form-group">
-            <label for="add-name">Nome</label>
-            <input class="form-control" id="add-name" v-model="user.name" required/>
-          </div>
-          <div class="form-group">
-            <label for="add-username">Username</label>
-            <input class="form-control" id="add-username" v-model="user.username" required/>
-          </div>
-          <div class="form-group">
-            <label for="add-email">Email</label>
-            <input class="form-control" id="add-email" v-model="user.email" required/>
-          </div>
-          <button type="submit" class="btn btn-primary">Adicionar</button>
-          <router-link class="btn btn-default" v-bind:to="'/'">Cancela</router-link>
-        </form>
-      </div>
-    </template>
+    </body>
 
-    <template id="user">
-      <div>
-        <h2>{{ user.name }}</h2>
-        <b>Usuario: </b>
-        <div>{{ user.username }}</div>
-        <b>Email:</b>
-        <div>{{ user.email }}</div>
-        <br/>
-        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-        <router-link v-bind:to="'/'">Voltar</router-link>
-      </div>
-    </template>
+    </html>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.1/vue-router.js'></script>
 
-    <template id="user-edit">
-      <div>
-        <h2>Editar usuario</h2>
-        <form v-on:submit="updateUser">
-          <div class="form-group">
-            <label for="edit-name">Nome</label>
-            <input class="form-control" id="edit-name" v-model="user.name" required/>
-          </div>
-          <div class="form-group">
-            <label for="edit-username">Username</label>
-            <input class="form-control" id="edit-username" v-model="user.username" required/>
-          </div>
-          <div class="form-group">
-            <label for="edit-email">Email</label>
-            <input class="form-control" id="edit-email" v-model="user.email" required/>
-          </div>
-          <button type="submit" class="btn btn-primary">Salvar</button>
-          <router-link class="btn btn-default" v-bind:to="'/'">Cancelar</router-link>
-        </form>
-      </div>
-    </template>
-
-    <template id="user-delete">
-      <div>
-        <h2>Deletar produto
-          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> {{ user.name }}</h2>
-        <form v-on:submit="deleteUser">
-          <h3>Você tem certeza???</h3>
-          <button type="submit" class="btn btn-danger">Deletar</button>
-          <router-link class="btn btn-default" v-bind:to="'/'">Cancelar</router-link>
-        </form>
-      </div>
-    </template>
-
-  </body>
-
-  </html>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.1/vue-router.js'></script>
-
-  <script src="js/index.js"></script>
+    <script src="js/index.js"></script>
 
 </body>
 
